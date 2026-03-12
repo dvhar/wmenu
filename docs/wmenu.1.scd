@@ -6,7 +6,7 @@ wmenu - dynamic menu for Wayland
 
 # SYNOPSIS
 
-*wmenu* [-bFiPv] \
+*wmenu* [-biPv] \
   [-f _font_] \
   [-l _lines_] \
   [-o _output_] \
@@ -22,7 +22,8 @@ wmenu - dynamic menu for Wayland
 *wmenu* is a dynamic menu for Wayland, which reads a list of newline-separated
 items from stdin. When the user selects an item and presses Return, their choice
 is printed to stdout and wmenu terminates. Entering text will narrow the items
-to those matching the tokens in the input.
+to those matching the input, using a fuzzy-matching algorithm to rank the
+results.
 
 *wmenu-run* is a special invocation of wmenu which lists programs in the user's
 $PATH and runs the result.
@@ -38,9 +39,6 @@ $PATH and runs the result.
 *-P*
 	wmenu will not directly display the keyboard input, but instead replace it
 	with asterisks.
-
-*-F*
-	enables fuzzy matching, ranking results by how closely they match the input.
 
 *-v*
 	prints version information to stdout, then exits.

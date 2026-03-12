@@ -33,6 +33,7 @@ struct menu *menu_create(menu_callback callback) {
 	menu->promptfg = 0xeeeeeeff;
 	menu->selectionbg = 0x005577ff;
 	menu->selectionfg = 0xeeeeeeff;
+	menu->fuzzy = true;
 	menu->callback = callback;
 	menu->test_surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, 1, 1);
 	menu->test_cairo = cairo_create(menu->test_surface);
@@ -85,12 +86,11 @@ static bool parse_color(const char *color, uint32_t *result) {
 // Parse menu options from command line arguments.
 void menu_getopts(struct menu *menu, int argc, char *argv[]) {
         const char *usage =
-                "Usage: wmenu [-bFiPv] [-f font] [-l lines] [-o output] [-p prompt]\n"
-                "\t[-N color] [-n color] [-M color] [-m color] [-S color] [-s color]\n"
-                "\t-F enable fuzzy matching\n";
+                "Usage: wmenu [-biPv] [-f font] [-l lines] [-o output] [-p prompt]\n"
+                "\t[-N color] [-n color] [-M color] [-m color] [-S color] [-s color]\n";
 
 	int opt;
-	while ((opt = getopt(argc, argv, "bhiPFvf:l:o:p:N:n:M:m:S:s:")) != -1) {
+	while ((opt = getopt(argc, argv, "bhiPvf:l:o:p:N:n:M:m:S:s:")) != -1) {
 		switch (opt) {
 		case 'b':
 			menu->bottom = true;
@@ -100,9 +100,6 @@ void menu_getopts(struct menu *menu, int argc, char *argv[]) {
 			break;
 		case 'P':
 			menu->passwd = true;
-			break;
-		case 'F':
-			menu->fuzzy = true;
 			break;
 		case 'v':
 			puts("wmenu " VERSION);
