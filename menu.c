@@ -31,7 +31,7 @@ struct menu *menu_create(menu_callback callback) {
 	menu->normalfg = 0xbbbbbbff;
 	menu->promptbg = 0x005577ff;
 	menu->promptfg = 0xeeeeeeff;
-	menu->selectionbg = 0x005577ff;
+	menu->selectionbg = 0x401008ff;
 	menu->selectionfg = 0xeeeeeeff;
 	menu->fuzzy = true;
 	menu->callback = callback;
